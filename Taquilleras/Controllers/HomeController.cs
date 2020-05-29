@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Taquilleras.Models;
 
+
 namespace Taquilleras.Controllers
 {
     public class HomeController : Controller
@@ -20,6 +21,7 @@ namespace Taquilleras.Controllers
 
         public IActionResult Index()
         {
+           
             return View();
         }
 
