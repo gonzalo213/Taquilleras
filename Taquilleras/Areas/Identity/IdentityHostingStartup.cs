@@ -15,14 +15,16 @@ namespace Taquilleras.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
-                services.AddDbContext<TaquillerasContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("TaquillerasContextConnection")));
+            //builder.ConfigureServices((context, services) => {
+            //    services.AddDbContext<TaquillerasContext>(options =>
+            //        options.UseSqlServer(
+            //            context.Configuration.GetConnectionString("TaquillerasContextConnection")));
 
-                services.AddDefaultIdentity<TaquillerasUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<TaquillerasContext>();
-            });
+            //    services.AddDefaultIdentity<TaquillerasUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //        .AddEntityFrameworkStores<TaquillerasContext>();
+            //});
+
+
         }
     }
 }
