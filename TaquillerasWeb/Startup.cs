@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Taquilleras.Data;
 using TaquillerasWeb.Models;
 using TaquillerasWeb.Services;
 namespace TaquillerasWeb
@@ -28,6 +30,17 @@ namespace TaquillerasWeb
             services.AddControllersWithViews();
             services.AddDbContext<taquillerassContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TaquillerasWebContextConnection")));
             services.AddScoped<CRUD1>();
+
+            
+
+            //services.AddTransient<ILogger, Implementacions>();
+
+            //object factoryWrapper(IServiceProvider x) => new DefaultFactory(Configuration, () => factory(x));
+
+            //services.TryAdd(new ServiceDescriptor(typeof(IDbConnectionFactory), factoryWrapper, lifetime));
+
+            services.AddDbConnectionFactory((sp) => new System.Data.SqlClient.SqlConnection(), Configuration, ServiceLifetime.Scoped);
+            //Serilog - implemetacones para bitacora
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

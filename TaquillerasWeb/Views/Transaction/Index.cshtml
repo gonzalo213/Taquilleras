@@ -1,0 +1,13 @@
+﻿@model Taquilleras.Entities.Transaction
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using (Html.BeginForm("Index", "Transaction", FormMethod.Post, Model))
+{
+    foreach (Taquilleras.Entities.TransactionDetail item in Model.TransactionDetail)
+    {
+    <a>@item.Quantity</a>
+     }
+<input type="submit" name="name" value="Guardar" class="btn btn-primary" />
+}

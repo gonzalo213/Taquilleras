@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TaquillerasWeb.Models
+namespace TaquillerasWeb.Model
 {
     public partial class Transaction
     {
@@ -11,12 +10,10 @@ namespace TaquillerasWeb.Models
             TransactionDetail = new HashSet<TransactionDetail>();
         }
 
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int Id { get; set; }
         public int KeyTaq { get; set; }
         public int ShiftTypeId { get; set; }
-        public DateTime DateVenta { get; set; }
+        public DateTime? DateVenta { get; set; }
         public string Status { get; set; }
         public string Inter { get; set; }
         public string InterSap { get; set; }
