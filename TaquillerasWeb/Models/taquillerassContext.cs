@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Taquilleras.Entities;
 
 namespace TaquillerasWeb.Models
 {
@@ -451,5 +452,7 @@ namespace TaquillerasWeb.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<Taquilleras.Entities.DepositSlip> DepositSlip_1 { get; set; }
     }
 }

@@ -1,0 +1,190 @@
+﻿@model IEnumerable<Taquilleras.Entities.DepositSlip>
+@*@model Taquilleras.Entities.DepositSlip*@
+
+@{
+    ViewData["Title"] = "Lista";
+}
+
+<h1>Lista</h1>
+@*<a class="btn btn-success" data-toggle="modal" data-target=".bootstramodal"><span>view</span></a>
+<div class="modal fade bootstramodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TicketOfficeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ShiftTypeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateSale)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateDeposit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Import)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NumFicha)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NumEnvase)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Expediente)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inter)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InterSap)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TicketOfficeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShiftTypeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateSale)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateDeposit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Import)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumFicha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumEnvase)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Expediente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inter)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InterSap)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>*@
+
+<p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TicketOfficeId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ShiftTypeId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateSale)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateDeposit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Import)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumFicha)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumEnvase)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Expediente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Inter)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InterSap)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketOfficeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShiftTypeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateSale)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateDeposit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Import)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumFicha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumEnvase)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Expediente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InterSap)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
