@@ -10,6 +10,7 @@ using Taquilleras.Entities;
 
 namespace TaquillerasWeb.Controllers.Sales
 {
+
     public class DepositSlipController : Controller
     {
 
@@ -19,9 +20,12 @@ namespace TaquillerasWeb.Controllers.Sales
         {
             _factory = factory;
         }
+
         public IActionResult Lista()
         {
-            Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip> entitytem = new Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>(_factory);
+            Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>
+            entitytem = new Taquilleras.Data.EntityManager
+            <Taquilleras.Entities.DepositSlip>(_factory);
             //Taquilleras.Entities.DepositSlip depo = new Taquilleras.Entities.DepositSlip();
             //{};
             var all = entitytem.GetAllAsync().Result;
@@ -37,58 +41,47 @@ namespace TaquillerasWeb.Controllers.Sales
         [HttpPost]
         public IActionResult Create(Taquilleras.Entities.DepositSlip depositSlip)
         {
-            Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip> entitytem = new Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>(_factory);
+            Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>
+            entitytem = new Taquilleras.Data.EntityManager
+            <Taquilleras.Entities.DepositSlip>(_factory);
             if (ModelState.IsValid)
             {
                 entitytem.CreateAsync(depositSlip).Wait();
             }
             return RedirectToAction(nameof(Lista));
-
         }
 
 
-        //[HttpGet]
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (id != null)
+            {
+                Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>
+                entitytem = new Taquilleras.Data.EntityManager
+                <Taquilleras.Entities.DepositSlip>(_factory);
 
-        //public IActionResult Edit(Taquilleras.Entities.DepositSlip depositSlip)
-        //{
-        //    if (depositSlip != null)
-        //    {
-        //        Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip> entitytem = new Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>(_factory);
+                Taquilleras.Entities.DepositSlip result = entitytem.GetAsync(id).Result;
+                if (result != null)
+                {
+                    return View(result);
+                }
+            }
+            return RedirectToAction(nameof(Lista));
+        }
 
-        //        entitytem.GetAsync(depositSlip).Wait();
+        [HttpPost]
+        public IActionResult Edit(Taquilleras.Entities.DepositSlip depositSlip)
+        {
+            Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>
+            entitytem = new Taquilleras.Data.EntityManager
+            <Taquilleras.Entities.DepositSlip>(_factory);
 
-        //        if (depositSlip != null)
-        //        {
-
-        //            return View(
-        //                depositSlip);
-
-        //        }
-        //    }
-        //    return RedirectToAction("Lista", "DepositSlip");
-
-        //}
-
-        //[HttpPost]
-
-        //public async Task<IActionResult> Edit(DepositSlip depositSlip)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        DepositSlip result = await _service.Update(depositSlip);
-        //        if (result != null)
-        //        {
-
-
-
-        //            return View(depositSlip);
-
-        //        }
-        //    }
-        //    return View(null);
-        //}
-
-
-        
+            if (ModelState.IsValid)
+            {
+                entitytem.UpdateAsync(depositSlip).Wait();
+            }
+            return RedirectToAction(nameof(Lista));
+        }
     }
 }
