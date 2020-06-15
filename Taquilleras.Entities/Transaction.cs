@@ -12,8 +12,19 @@ namespace Taquilleras.Entities
     {
         public Transaction()
         {
-           TransactionDetail = new HashSet<TransactionDetail>();
+           TransactionDetail = new List<TransactionDetail>();
         }
+        public Transaction(Transaction transaction)
+        {
+            this.Id = transaction.Id;
+            this.DateVenta = transaction.DateVenta;
+            this.KeyTaq = transaction.KeyTaq;
+            this.ShiftTypeId = transaction.ShiftTypeId;
+            this.Inter = transaction.Inter;
+            this.InterSap = transaction.InterSap;
+            this.Status = transaction.Status;
+            this.TransactionDetail = new List<TransactionDetail>();
+         }
 
         [Dapper.Contrib.Extensions.Key]
         public int Id { get; set; }
@@ -25,7 +36,9 @@ namespace Taquilleras.Entities
         public string InterSap { get; set; }
         public decimal? TotalAmount { get; set; }
         [Dapper.Contrib.Extensions.Computed]
-        public virtual ICollection<TransactionDetail> TransactionDetail { get; set; }
+        public virtual List<TransactionDetail> TransactionDetail { get; set; }
 
+
+        public Transaction Clone() { return new Transaction(this); }
     }
 }

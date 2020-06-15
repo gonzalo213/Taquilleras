@@ -16,7 +16,8 @@ using Microsoft.Extensions.Logging;
 
 namespace TaquillerasWeb.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    // [Authorize(Roles ="Administrador")]
+    [Authorize]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

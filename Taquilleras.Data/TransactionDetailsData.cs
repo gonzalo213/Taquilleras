@@ -1,6 +1,7 @@
 ﻿using Dapper.Contrib.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using Taquilleras.Entities;
@@ -25,6 +26,16 @@ namespace Taquilleras.Data
                 }
             }
             return 1;
+        }
+        public List<TransactionDetail> GetByTransaction(int transactionId)
+        {
+            ICollection<TransactionDetail> transactionsDetails = new HashSet<TransactionDetail>();
+            using (var db = _factory.CreateConnection(Constants.ConnectionStringName))
+            {
+                string sql = string.Format(@"select * from dbo.TransactionDetail details where details.TransactionId = '{0}'", transactionId);
+                return this.GetBySQL(sql).Result.ToList();
+            }
+            
         }
     }
 }

@@ -1,108 +1,45 @@
-﻿@model TaquillerasWeb.Controllers.Sales.TransactionTem
-@{
+﻿@model List<TaquillerasWeb.Controllers.Sales.TransactionTem>
+    @{
     ViewData["Title"] = "SalesPoint";
-}
-
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<style>
-    th {
-        text-align: center;
     }
-</style>
-<a class="btn btn-success" data-toggle="modal" data-target=".bootstramodal" ><span >view</span></a>
-<div class="modal fade bootstramodal" >
-    <div class="modal-dialog">
-        <div class="modal-content">
-            @using (Html.BeginForm("Operation", "Transaction", FormMethod.Post, Model))
-            {
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        th {
+            text-align: center;
+        }
+    </style>
+    <a class="btn btn-success" data-toggle="modal" data-target=".bootstramodal"><span>view</span></a>
+    <div class="modal fade bootstramodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
                 <div class="modal-header"> Registro de venta</div>
                 <div class="modal-body">
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-6">
-                                <span class="control-label">Fecha de Venta:</span>
-                            </div>
-                            <div class="col-sm-6 col-xs-6">
-                                @Html.TextBoxFor(e => e.SalesDate, new { @class = "form-control", id = "datepicker" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-6">
-                                <span class="control-label">Boletos recibidos:</span>
-                            </div>
-                            <div class="col-sm-6 col-xs-6">
-                                @Html.TextBoxFor(e => e.ImportTicketRecived, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-6">
-                                Boletos dotación:
-                            </div>
-                            <div class="col-sm-6 col-xs-6">
-                                @Html.TextBoxFor(e => e.ImportTicketDotation, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-6">
-                                Boletos venta:
-                            </div>
-                            <div class="col-sm-6 col-xs-6">
-                                @Html.TextBoxFor(e => e.ImportTicketSale, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-6">
-                                Tarjetas recibidos:
-                            </div>
-                            <div class="col-sm-6 col-xs-6">
-                                @Html.TextBoxFor(e => e.ImportCardRecived, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-6">
-                                Tarjetas dotación:
-                            </div>
-                            <div class="col-sm-6 col-xs-6">
-                                @Html.TextBoxFor(e => e.ImportCardDotation, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-6">
-                                Tarjetas venta:
-                            </div>
-                            <div class="col-sm-6 col-xs-6">
-                                @Html.TextBoxFor(e => e.ImportCardSale, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-6">
-                                Saldo venta:
-                            </div>
-                            <div class="col-sm-6 col-xs-6">
-                                @Html.TextBoxFor(e => e.ImporRefillSale, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="row col-sm-10 col-xs-10">
-
-                        </div>
-                    </div>
-                    
-                 <div class="modal-footer"></div>
-                    <input type="submit" name="name" value="Guardar" class="btn btn-primary" />
+                    @Html.Partial("_PointSale.cshtml",Model[0])
                 </div>
-            }
+                <div class="modal-footer">
+
+                </div>
             </div>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-sm-4 col-xs-6">@Html.Partial("_PointSale.cshtml",Model[0])</div>
+        <div class="col-sm-4 col-xs-6">@Html.Partial("_PointSale.cshtml",Model[1])</div>
+        <div class="col-sm-4 col-xs-6">@Html.Partial("_PointSale.cshtml",Model[2])</div>
+    </div>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-<script>
-    $('#datepicker').datepicker({
-        uiLibrary: 'bootstrap4'
-    });
-</script>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+    </script>

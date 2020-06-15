@@ -1,4 +1,5 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using Dapper;
+using Dapper.Contrib.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -52,6 +53,22 @@ namespace Taquilleras.Data
                 return await db.GetAllAsync<T>();
             }
         }
-       
+
+        public async virtual Task<IEnumerable<T>> GetBySQL(string sql )
+        {
+            using (var db = _factory.CreateConnection(Constants.ConnectionStringName))
+            {
+                return await db.QueryAsync<T>(sql);
+            }
+        }
+
+        public async virtual Task<T> GetByID(int id)
+        {
+            using (var db = _factory.CreateConnection(Constants.ConnectionStringName))
+            {
+                return await db.GetAsync<T>(id);
+            }
+        }
+
     }
 }

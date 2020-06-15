@@ -28,8 +28,8 @@ namespace TaquillerasWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<taquillerassContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TaquillerasWebContextConnection")));
-            services.AddScoped<CRUD1>();
+            //services.AddDbContext<taquillerassContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TaquillerasWebContextConnection")));
+            //services.AddScoped<CRUD1>();
 
             
 

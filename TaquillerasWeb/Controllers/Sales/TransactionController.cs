@@ -5,14 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Taquilleras.Data;
-using TaquillerasWeb.Models;
 using Taquilleras.Entities;
 
 namespace TaquillerasWeb.Controllers.Sales
 {
     public class TransactionController : Controller
     {
-        private taquillerassContext db = new taquillerassContext();
         private readonly IDbConnectionFactory _factory;
 
         public TransactionController(IDbConnectionFactory factory, IConfiguration configuration)
@@ -34,12 +32,15 @@ namespace TaquillerasWeb.Controllers.Sales
         [HttpGet]
         public IActionResult Operation()
         {
-            return View();
+            List <TransactionTem> details = new List<TransactionTem> {  new TransactionTem { ImportCardDotation = 500 }, 
+                                                                        new TransactionTem { ImportCardDotation = 70 } ,
+                                                                        new TransactionTem { ImportCardDotation  = 400 } };
+            return View(details);
         }
         [HttpPost]
         public IActionResult Operation(TransactionTem tem)
         {
-
+            /*
             Taquilleras.Entities.Transaction salesTransacction = new Taquilleras.Entities.Transaction {KeyTaq = 1,DateVenta = tem.SalesDate, ShiftTypeId = 1, Status = "A" };
             salesTransacction.TransactionDetail = new HashSet<Taquilleras.Entities.TransactionDetail> { new Taquilleras.Entities.TransactionDetail() { ProductId = 1, MovementTypeId = 1, Quantity = tem.ImportTicketRecived, TransactionId = salesTransacction.Id },
                                                                         new Taquilleras.Entities.TransactionDetail() { ProductId = 1, MovementTypeId = 2, Quantity= tem.ImportTicketDotation,TransactionId = salesTransacction.Id },
@@ -79,7 +80,7 @@ namespace TaquillerasWeb.Controllers.Sales
             if (tem.ImporRefillSale > 0)
                 details.Add(new Taquilleras.Entities.TransactionDetail() { ProductId = 3, MovementTypeId = 3, Quantity = tem.ImporRefillSale, TransactionId = salesTransacction.Id });
             entityDetail.AddRange(details);
-/*
+
             entityDetail.AddRange(new HashSet<Taquilleras.Entities.TransactionDetail> { new Taquilleras.Entities.TransactionDetail() { ProductId = 1, MovementTypeId = 1, Quantity = tem.ImportTicketRecived, TransactionId = salesTransacction.Id },
                                                                         new Taquilleras.Entities.TransactionDetail() { ProductId = 1, MovementTypeId = 2, Quantity= tem.ImportTicketDotation,TransactionId = salesTransacction.Id },
                                                                         new Taquilleras.Entities.TransactionDetail() { ProductId = 1, MovementTypeId = 3, Quantity = tem.ImportTicketSale,TransactionId = salesTransacction.Id },
@@ -90,7 +91,8 @@ namespace TaquillerasWeb.Controllers.Sales
                                                                         });
            
             //entity.CreateAsync(salesTransacction).Wait();*/
-            return View(tem);
+          
+            return View();
         }
     }
     public class TransactionTem

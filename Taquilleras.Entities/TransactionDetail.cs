@@ -5,7 +5,7 @@ namespace Taquilleras.Entities
     [Dapper.Contrib.Extensions.Table("TransactionDetail")]
     public partial class TransactionDetail
     {
-        
+        [Dapper.Contrib.Extensions.Key]
         public int Id { get; set; }
         public int TransactionId { get; set; }
         public int ProductId { get; set; }
@@ -15,8 +15,8 @@ namespace Taquilleras.Entities
         public decimal Quantity { get; set; }
         public decimal Price { get; set; }
 
-        //public virtual ActionType MovementType { get; set; }
-        //public virtual Product Product { get; set; }
-        //public virtual Transaction Transaction { get; set; }
+        public virtual ActionType MovementType { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual Transaction Transaction { get; set; }
     }
 }

@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-
-namespace TaquillerasWeb.Model
+using Dapper.Contrib.Extensions;
+namespace Taquilleras.Entities
 {
-    public partial class Product
+    [Table("ActionType")]
+    public partial class ActionType
     {
-        public Product()
+        public ActionType()
         {
             TransactionDetail = new HashSet<TransactionDetail>();
         }
-
-        public int IdProduct { get; set; }
+        [Key]
+        public int IdTipoMovimiento { get; set; }
         public string Description { get; set; }
-        public decimal Price { get; set; }
 
         public virtual ICollection<TransactionDetail> TransactionDetail { get; set; }
     }

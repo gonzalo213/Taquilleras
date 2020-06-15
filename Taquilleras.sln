@@ -5,9 +5,14 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaquillerasWeb", "TaquillerasWeb\TaquillerasWeb.csproj", "{A8A2A06A-097F-4989-9BC2-39D8FB03B2B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taquilleras.Data", "Taquilleras.Data\Taquilleras.Data.csproj", "{E10F3A87-CB4F-4F86-AE3A-8802C5D82424}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taquilleras.Data", "Taquilleras.Data\Taquilleras.Data.csproj", "{E10F3A87-CB4F-4F86-AE3A-8802C5D82424}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taquilleras.Entities", "Taquilleras.Entities\Taquilleras.Entities.csproj", "{800AB16A-3715-4F3F-95C3-81C01CA3AE10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taquilleras.Entities", "Taquilleras.Entities\Taquilleras.Entities.csproj", "{800AB16A-3715-4F3F-95C3-81C01CA3AE10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6A6D788B-8D90-468E-A470-DED07A83693B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

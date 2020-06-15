@@ -22,4 +22,12 @@
     <ProjectReference Include="..\Taquilleras.Entities\Taquilleras.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
 </Project>

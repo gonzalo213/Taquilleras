@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Dapper.Contrib.Extensions;
 
-namespace TaquillerasWeb.Model
+namespace Taquilleras.Entities
 {
-    public partial class TicketOffice
+    public partial class ShiftType
     {
-        public TicketOffice()
+        public ShiftType()
         {
             DepositSlip = new HashSet<DepositSlip>();
             Transaction = new HashSet<Transaction>();
@@ -13,13 +14,6 @@ namespace TaquillerasWeb.Model
 
         public int Id { get; set; }
         public string Description { get; set; }
-        public string NumPos { get; set; }
-        public string PhoneExt { get; set; }
-        public string Status { get; set; }
-        public string ActiveTaq { get; set; }
-        public string PosAux1 { get; set; }
-        public string PosAux2 { get; set; }
-        public string PosAux3 { get; set; }
 
         public virtual ICollection<DepositSlip> DepositSlip { get; set; }
         public virtual ICollection<Transaction> Transaction { get; set; }
