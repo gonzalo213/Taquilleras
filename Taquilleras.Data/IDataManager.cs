@@ -13,6 +13,7 @@ namespace Taquilleras.Data
 
         Task UpdateAsync(T entity);
 
+        Task<T> GetAsync(int? id);
 
     }
 }

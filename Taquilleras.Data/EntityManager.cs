@@ -30,9 +30,14 @@ namespace Taquilleras.Data
                 return entity;
             }
         }
-
-
-
+        public async virtual Task<T> GetAsync(int? id)
+        {
+            using (var db = _factory.CreateConnection(Constants.ConnectionStringName))
+            {
+              var result= await db.GetAsync<T>(id);
+                return result;
+            }
+        }
         public async virtual Task UpdateAsync(T entity)
         {
             using (var db = _factory.CreateConnection(Constants.ConnectionStringName))
@@ -40,8 +45,6 @@ namespace Taquilleras.Data
                 await db.UpdateAsync<T>(entity);
             }
         }
-
-
         /// <summary>
         /// Metodo que llena la lista con una colección
         /// </summary>
