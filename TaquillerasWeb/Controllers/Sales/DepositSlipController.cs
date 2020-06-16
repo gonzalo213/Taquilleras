@@ -16,21 +16,16 @@ namespace TaquillerasWeb.Controllers.Sales
 
         //private taquillerassContext db = new taquillerassContext();
         private readonly IDbConnectionFactory _factory;
-        public DepositSlipController(IDbConnectionFactory factory, IConfiguration configuration)
+        private EntityManager<Taquilleras.Entities.DepositSlip> entitytem;
+        public DepositSlipController(IDbConnectionFactory factory)
         {
             _factory = factory;
+            entitytem = new Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>(factory);
         }
 
         public IActionResult Lista()
         {
-            Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>
-            entitytem = new Taquilleras.Data.EntityManager
-            <Taquilleras.Entities.DepositSlip>(_factory);
-            //Taquilleras.Entities.DepositSlip depo = new Taquilleras.Entities.DepositSlip();
-            //{};
-            var all = entitytem.GetAllAsync().Result;
-            //entitytem.GetAllAsync().Wait();
-            return View(all);
+            return View(entitytem.GetAllAsync().Result);
         }
         [HttpGet]
         public IActionResult Create()
@@ -41,9 +36,6 @@ namespace TaquillerasWeb.Controllers.Sales
         [HttpPost]
         public IActionResult Create(Taquilleras.Entities.DepositSlip depositSlip)
         {
-            Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>
-            entitytem = new Taquilleras.Data.EntityManager
-            <Taquilleras.Entities.DepositSlip>(_factory);
             if (ModelState.IsValid)
             {
                 entitytem.CreateAsync(depositSlip).Wait();
@@ -57,10 +49,6 @@ namespace TaquillerasWeb.Controllers.Sales
         {
             if (id != null)
             {
-                Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>
-                entitytem = new Taquilleras.Data.EntityManager
-                <Taquilleras.Entities.DepositSlip>(_factory);
-
                 Taquilleras.Entities.DepositSlip result = entitytem.GetAsync(id).Result;
                 if (result != null)
                 {
@@ -73,10 +61,6 @@ namespace TaquillerasWeb.Controllers.Sales
         [HttpPost]
         public IActionResult Edit(Taquilleras.Entities.DepositSlip depositSlip)
         {
-            Taquilleras.Data.EntityManager<Taquilleras.Entities.DepositSlip>
-            entitytem = new Taquilleras.Data.EntityManager
-            <Taquilleras.Entities.DepositSlip>(_factory);
-
             if (ModelState.IsValid)
             {
                 entitytem.UpdateAsync(depositSlip).Wait();

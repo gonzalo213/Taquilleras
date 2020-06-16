@@ -77,7 +77,7 @@ namespace TaquillerasWeb.Controllers.Sales
             EntityManager<TicketOffice> admTicketOffice = new EntityManager<TicketOffice>(this._factory);
             List<TicketOffice> lst = admTicketOffice.GetAllAsync().Result.ToList();
             ViewBag.entities = (List<SelectListItem>)lst.ConvertAll(d => { return new SelectListItem() { Value = d.Id.ToString(), Text = d.Description }; });
-
+            TempData["llave"] = 3;
             return View("~/Views/Admin/Index.cshtml", transactionsTem);
         }
 
