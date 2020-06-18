@@ -1,17 +1,31 @@
 ﻿@model List<Taquilleras.Entities.Transaction>
 @using (Html.BeginForm("Find", "Admin", FormMethod.Post))
 {
-    @Html.DropDownList("Taquilla", (List<SelectListItem>)ViewBag.entities, "Selecciona", new { @class = "form-control" })
-    <input type="text" class="form-control" id="dpFilter" name="dpFilter" />
-    <div class="row" style="text-align: right ">
-        <input type="submit" name="name" value="Buscar" class="btn btn-primary" />
+    <h4><strong>Modificacion de Venta</strong></h4>
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <input required type="text" class="form-control col-3 offset-9" id="dpFilter" name="dpFilter" placeholder="Selecciona Fecha" />
+            </div>
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <div class="input-group mb-0">
+                    <div class="input-group-prepend">
+                        <input type="submit" name="name" value="Buscar" class="btn btn-outline-info" />
+                    </div>
+                    @Html.DropDownList("Taquilla", (List<SelectListItem>)ViewBag.entities, "Selecciona Taquilla", new { @class = "form-control", required = "required" })
+                </div>
+            </blockquote>
+        </div>
     </div>
+
 }
 
 
 @if (Model != null)
 {
-    <div class="row" id="divDetails" style="text-align: right">
+    <div class="row" id="divDetails" @*style="text-align: right"*@>
         @foreach (Taquilleras.Entities.Transaction transaction in Model)
         {
             <div class="col-sm-4 col-xs-6">@Html.Partial("_Item.cshtml", transaction.TransactionDetail)</div>
@@ -47,7 +61,7 @@
             var obj = JSON.parse(jsonStr);
             $("#divDetails").find(':input').each(function () {
                 var elemento = this;
-                obj['details'].push({ "tControlId": elemento.id, "value": elemento.value});                
+                obj['details'].push({ "tControlId": elemento.id, "value": elemento.value});
             })
 
             jsonStr = JSON.stringify(obj);

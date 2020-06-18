@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Taquilleras.Data;
 using TaquillerasWeb.Models;
 using Taquilleras.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace TaquillerasWeb.Controllers.Sales
 {
@@ -25,7 +26,12 @@ namespace TaquillerasWeb.Controllers.Sales
 
         public IActionResult Lista()
         {
-            return View(entitytem.GetAllAsync().Result);
+            if (ModelState.IsValid)
+            {
+                var all = entitytem.GetAllAsync().Result;
+                return View(all);
+            }
+            return View();
         }
         [HttpGet]
         public IActionResult Create()
