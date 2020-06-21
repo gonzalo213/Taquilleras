@@ -4,91 +4,72 @@
 @{
     ViewData["Title"] = "Lista";
 }
-
+    <link href="~/DataTables-1.10.20/datatables.min.css" rel="stylesheet" />
 <h1>Lista</h1>
 
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-outline-success" asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        @*<tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TicketOfficeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShiftTypeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateSale)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateDeposit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Import)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumFicha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumEnvase)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Expediente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Inter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InterSap)
-            </th>
-            <th></th>
-        </tr>*@
-        @*@foreach (Taquilleras.Entities.DepositSlip transaction in Model)
-        {*@
-        <tr>
-            <th>
-               TicketOfficeId
-            </th>
-            <th>
-               ShiftTypeId
-            </th>
-            <th>
-                DateSale
-            </th>
-            <th>
-                DateDeposit
-            </th>
-            <th>
-               Import
-            </th>
-            <th>
-                NumFicha
-            </th>
-            <th>
-              NumEnvase
-            </th>
-            <th>
-                Expediente
-            </th>
-            <th>
-               Status
-            </th>
-            <th>
-               Inter
-            </th>
-            <th>
-                InterSap
-            </th>
 
+<table  id="example" class="display" style="width:90%" >
+    <thead>
+        <tr>
+            <th>TicketOfficeId</th>
+            <th>ShiftTypeId</th>
+            <th>DateSale</th>
+            <th>DateDeposit</th>
+            <th>Import</th>
+            <th> NumFicha</th>
+            <th> NumEnvase</th>
+            <th>Expediente </th>
+            <th>Status</th>
+            @*<th>Inter</th>
+            <th>InterSap</th>*@
+        <th></th>
         </tr>
-        @*}*@
     </thead>
+
+   
+        @*<thead>
+            <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TicketOfficeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ShiftTypeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateSale)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateDeposit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Import)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NumFicha)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NumEnvase)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Expediente)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inter)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InterSap)
+                    </th>
+                    <th></th>
+                </tr>
+            
+        </thead>*@
     <tbody>
         @foreach (var item in Model)
         {
@@ -120,21 +101,31 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Inter)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.InterSap)
-                </td>
+                </td>*@
                 <td>
-                 
-                        <div class="col-sm-4 col-xs-6">@Html.Partial("Edit.cshtml")</div>
-                    
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+
+
+
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
                     @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<script src="~/DataTables-1.10.20/datatables.min.js"></script>
+
+<script>
+  
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+    
+</script>

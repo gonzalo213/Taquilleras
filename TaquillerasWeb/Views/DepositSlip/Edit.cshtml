@@ -4,79 +4,82 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>DepositSlip</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
+
+<div class="card border-primary mb-3 offset-2" style="max-width: 50rem;">
+    <div class="card-header">Editar Ficha de Deposito</div>
+    <div class="card-body text-black">
+        <h5 class="card-title"></h5>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="TicketOfficeId" class="control-label"></label>
-                <input asp-for="TicketOfficeId" class="form-control" />
-                <span asp-validation-for="TicketOfficeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShiftTypeId" class="control-label"></label>
-                <input asp-for="ShiftTypeId" class="form-control" />
-                <span asp-validation-for="ShiftTypeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateSale" class="control-label"></label>
-                <input asp-for="DateSale" class="form-control" />
-                <span asp-validation-for="DateSale" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateDeposit" class="control-label"></label>
-                <input asp-for="DateDeposit" class="form-control" />
-                <span asp-validation-for="DateDeposit" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Import" class="control-label"></label>
-                <input asp-for="Import" class="form-control" />
-                <span asp-validation-for="Import" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumFicha" class="control-label"></label>
-                <input asp-for="NumFicha" class="form-control" />
-                <span asp-validation-for="NumFicha" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumEnvase" class="control-label"></label>
-                <input asp-for="NumEnvase" class="form-control" />
-                <span asp-validation-for="NumEnvase" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Expediente" class="control-label"></label>
-                <input asp-for="Expediente" class="form-control" />
-                <span asp-validation-for="Expediente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="TicketOfficeId" class="control-label"></label>
+                    <input readonly asp-for="TicketOfficeId" class="form-control" />
+                    <span asp-validation-for="TicketOfficeId" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="ShiftTypeId" class="control-label"></label>
+                    <input readonly  asp-for="ShiftTypeId" class="form-control" />
+                    <span asp-validation-for="ShiftTypeId" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="DateSale" class="control-label"></label>
+                    <input asp-for="DateSale" class="form-control" />
+                    <span asp-validation-for="DateSale" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="DateDeposit" class="control-label"></label>
+                    <input asp-for="DateDeposit" class="form-control" />
+                    <span asp-validation-for="DateDeposit" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Import" class="control-label"></label>
+                    <input asp-for="Import" class="form-control" />
+                    <span asp-validation-for="Import" class="text-danger"></span>
+                </div>
+                <div class="col-3">
+                    <label asp-for="NumFicha" class="control-label"></label>
+                    <input asp-for="NumFicha" class="form-control" />
+                    <span asp-validation-for="NumFicha" class="text-danger"></span>
+                </div>
+                <div class="col-3">
+                    <label asp-for="NumEnvase" class="control-label"></label>
+                    <input asp-for="NumEnvase" class="form-control" />
+                    <span asp-validation-for="NumEnvase" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Expediente" class="control-label"></label>
+                    <input readonly value="123456" asp-for="Expediente" class="form-control" />
+                    <span asp-validation-for="Expediente" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Status" class="control-label"></label>
+                    <input readonly value="A" asp-for="Status" class="form-control" />
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+                @*<div class="col">
                 <label asp-for="Inter" class="control-label"></label>
                 <input asp-for="Inter" class="form-control" />
                 <span asp-validation-for="Inter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            </div>*@
+                @*<div class="col">
                 <label asp-for="InterSap" class="control-label"></label>
                 <input asp-for="InterSap" class="form-control" />
                 <span asp-validation-for="InterSap" class="text-danger"></span>
+            </div>*@
             </div>
-            <div class="form-group">
+            <div class="mt-3">
+
                 <input type="submit" value="Save" class="btn btn-primary" />
+
+                <a class="btn btn-info" asp-controller="DepositSlip" asp-action="Lista">Regresar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

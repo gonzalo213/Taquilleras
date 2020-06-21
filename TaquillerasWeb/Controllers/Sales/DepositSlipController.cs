@@ -45,6 +45,7 @@ namespace TaquillerasWeb.Controllers.Sales
             if (ModelState.IsValid)
             {
                 entitytem.CreateAsync(depositSlip).Wait();
+                
             }
             return RedirectToAction(nameof(Lista));
         }
@@ -63,7 +64,6 @@ namespace TaquillerasWeb.Controllers.Sales
             }
             return RedirectToAction(nameof(Lista));
         }
-
         [HttpPost]
         public IActionResult Edit(Taquilleras.Entities.DepositSlip depositSlip)
         {
@@ -73,5 +73,57 @@ namespace TaquillerasWeb.Controllers.Sales
             }
             return RedirectToAction(nameof(Lista));
         }
+
+
+
+
+        [HttpGet]
+        public IActionResult Edit1(int? id)
+        {
+            if (id != null)
+            {
+                Taquilleras.Entities.DepositSlip result = entitytem.GetAsync(id).Result;
+                if (result != null)
+                {
+                    return View(result);
+                }
+            }
+            return RedirectToAction(nameof(Lista));
+        }
+        [HttpPost]
+        public IActionResult Edit1(Taquilleras.Entities.DepositSlip depositSlip)
+        {
+            if (ModelState.IsValid)
+            {
+                entitytem.UpdateAsync(depositSlip).Wait();
+            }
+            return RedirectToAction(nameof(Lista));
+        }
+        //[HttpGet]
+        //public PartialViewResult Edit1(int? id)
+        //{
+        //    if (id != null)
+        //    {
+        //        Taquilleras.Entities.DepositSlip result = entitytem.GetAsync(id).Result;
+        //        if (result != null)
+        //        {
+        //            return PartialView(result);
+        //        }
+        //    }
+        //    return PartialView(nameof(Lista));
+        //}
+        //[HttpPost]
+        //public JsonResult Edit1(Taquilleras.Entities.DepositSlip depositSlip)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        entitytem.UpdateAsync(depositSlip).Wait();
+        //    }
+        //    return Json(depositSlip);
+        //}
+
+
+
+
     }
 }
