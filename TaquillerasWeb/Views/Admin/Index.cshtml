@@ -28,8 +28,21 @@
 <div class="row" id="divDetails" @*style="text-align: right"*@>
     @foreach (Taquilleras.Entities.Transaction transaction in Model)
     {
-        <div class="card-header">Turno @transaction.ShiftTypeId </div>
-        <div class="col-sm-4 col-xs-6">@Html.Partial("_Item.cshtml", transaction.TransactionDetail)</div>
+    <div class="card border-info mb-3 mr-5 mt-3" style="max-width: 18rem;">
+        <div class="card-header">
+            <h6>Turno:<span class="badge badge-dark mr-3"> @transaction.ShiftTypeId</span></h6>
+           
+            <h6>Nombre Taquillera:<span class="text-black-50">Nombre Taquillera</span></h6>
+
+        </div>
+        <div class="card-body text-info">
+            <div class="">@Html.Partial("_Item.cshtml", transaction.TransactionDetail)</div>
+        </div>
+        <div class="card-footer bg-transparent border-info">
+        <h4>Saldo Total<span class="badge badge-success">$@transaction.TotalAmount</span></h4>
+        </div>
+    </div>
+
         
     }
 </div>
