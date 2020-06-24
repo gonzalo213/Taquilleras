@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Taquilleras.Entities
 {
@@ -9,10 +10,15 @@ namespace Taquilleras.Entities
         public int Id { get; set; }
         public int TicketOfficeId { get; set; }
         public int ShiftTypeId { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public DateTime DateSale { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public DateTime DateDeposit { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public decimal Import { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string NumFicha { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string NumEnvase { get; set; }
         public string Expediente { get; set; }
         public string Status { get; set; }
