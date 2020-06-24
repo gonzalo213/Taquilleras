@@ -104,6 +104,9 @@ namespace TaquillerasWeb.Controllers.Sales
                 if (transactions.Count == 0)
                     transactions.Add(new Transaction() { Id = idTransaction });
                 else
+                {
+
+                }
                     if (transactions.Where(t => t.Id == idTransaction).Count() > 0)
                     transactions.Where(t => t.Id == idTransaction).First().TransactionDetail.Add(new TransactionDetail() { Id = idTransaction, ProductId = idProduct, MovementTypeId = idType });
                 else
