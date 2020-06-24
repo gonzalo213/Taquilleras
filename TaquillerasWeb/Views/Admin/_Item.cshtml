@@ -8,7 +8,8 @@
                     <span class="control-label">@detail.MovementType.Description </span>
                 </div>
                 <div class="col-sm-6 col-xs-6">
-                    @Html.TextBox(string.Format("t-{0};d-{1};p-{2};m-{3}",detail.Transaction.Id,detail.Id,detail.Product.IdProduct,detail.MovementType.IdTipoMovimiento), detail.Quantity)
+                    <!--t-{0};d-{1};p-{2};m-{3}-->
+                    @Html.TextBox(string.Format("{0};{1};{2};{3}", detail.Transaction.Id, detail.Id, detail.Product.IdProduct, detail.MovementType.IdTipoMovimiento), detail.Quantity)
                 </div>
             </div>
         }

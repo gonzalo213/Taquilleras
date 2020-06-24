@@ -1,7 +1,7 @@
 ﻿@model List<Taquilleras.Entities.Transaction>
 @using (Html.BeginForm("Find", "Admin", FormMethod.Post))
 {
-    @Html.DropDownList("Taquilla", (List<SelectListItem>)ViewBag.entities, "Selecciona", new { @class = "form-control" })
+    @Html.DropDownList("Taquilla", (List<SelectListItem>)TempData["TicketOffices"], "Selecciona", new { @class = "form-control" })
     <input type="text" class="form-control" id="dpFilter" name="dpFilter" />
     <div class="row" style="text-align: right ">
         <input type="submit" name="name" value="Buscar" class="btn btn-primary" />
@@ -18,7 +18,7 @@
         }
     </div>
 }
-<input type="button" id="btnClick" value="Click" class="btn btn-primary" />
+<input type="button" id="btnCancel" value="Click" class="btn btn-primary" />
 <input type="button" id="btnApplyChanges" value="Aplicar cambios" class="btn btn-primary" />
 <span id="span"></span>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -40,27 +40,25 @@
             });
         });
     });
-
     $(function (){
         $("#btnApplyChanges").click(function () {
-            var jsonStr = '{"details":[{"ControlId":"","values":"0"},{"ControlId":"0","values":"0"}]}';
-            var obj = JSON.parse(jsonStr);
+            var jsonStr = ''
+            var obj 
             $("#divDetails").find(':input').each(function () {
                 var elemento = this;
-                obj['details'].push({ "tControlId": elemento.id, "value": elemento.value});                
+                if (elemento.value > 0) {
+                    if (jsonStr == '') {
+                        jsonStr = '{"ClientTransaction":[{"ProducId":"' + elemento.id + '","Value":"' + elemento.value + '"}]}';
+                        obj = JSON.parse(jsonStr);
+                    }                        
+                    else
+                        obj['ClientTransaction'].push({ "ProducId": elemento.id, "Value": elemento.value });
+                }
             })
-
-            jsonStr = JSON.stringify(obj);
-            alert(jsonStr);
-
+     
             $.ajax({
-                type: "POST",
-                async: false,
                 url: "@Url.Action("Test","Admin")",
-                data: "{name:'Mauricio'}",
-                contentType: "application/json",
-                dataType: "json",
-
+                data: { data: JSON.stringify(obj) } ,
                 success: function (json) {
                     $("#btnClick").val(json)
                 },

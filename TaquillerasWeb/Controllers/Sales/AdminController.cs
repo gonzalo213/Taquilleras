@@ -20,18 +20,20 @@ namespace TaquillerasWeb.Controllers.Sales
         TransactionData td;
         EntityManager<Product> producManager;
         EntityManager<ActionType> actionManager;
+        EntityManager<TicketOffice> admTicketOffice;
+        List<TicketOffice> lst;
         public AdminController(IDbConnectionFactory factory)
         {
             _factory = factory;
             td = new TransactionData(this._factory);
             producManager = new EntityManager<Product>(this._factory);
             actionManager = new EntityManager<ActionType>(this._factory);
+            admTicketOffice = new EntityManager<TicketOffice>(this._factory);
+            lst = admTicketOffice.GetAllAsync().Result.ToList();            
         }
         public IActionResult Index()
         {
-            EntityManager<TicketOffice> admTicketOffice = new EntityManager<TicketOffice>(this._factory);
-            List<TicketOffice> lst = admTicketOffice.GetAllAsync().Result.ToList();
-            ViewBag.entities = (List<SelectListItem>)lst.ConvertAll(d => { return new SelectListItem() { Value = d.Id.ToString(), Text = d.Description }; });
+            TempData["TicketOffices"] = (List<SelectListItem>)lst.ConvertAll(d => { return new SelectListItem() { Value = d.Id.ToString(), Text = d.Description }; });
             return View();
         }
         [HttpPost]
@@ -74,22 +76,14 @@ namespace TaquillerasWeb.Controllers.Sales
                             transaction.TransactionDetail.Add(tem);
                     }
 
-            EntityManager<TicketOffice> admTicketOffice = new EntityManager<TicketOffice>(this._factory);
-            List<TicketOffice> lst = admTicketOffice.GetAllAsync().Result.ToList();
-            ViewBag.entities = (List<SelectListItem>)lst.ConvertAll(d => { return new SelectListItem() { Value = d.Id.ToString(), Text = d.Description }; });
-            TempData["llave"] = 3;
+            TempData["TicketOffices"] = (List<SelectListItem>)lst.ConvertAll(d => { return new SelectListItem() { Value = d.Id.ToString(), Text = d.Description }; });
             return View("~/Views/Admin/Index.cshtml", transactionsTem);
         }
 
         [HttpGet]
         public IActionResult Edit()
         {
-
-
-            List<TransactionTem> details = new List<TransactionTem> {  new TransactionTem { ImportCardDotation = 500 },
-                                                                        new TransactionTem { ImportCardDotation = 70 } ,
-                                                                        new TransactionTem { ImportCardDotation  = 400 } };
-            return View(details);
+            return View();
 
         }
         [HttpPost]
@@ -97,10 +91,32 @@ namespace TaquillerasWeb.Controllers.Sales
         {
             return View();
         }
-        [HttpPost]
-        public JsonResult Test(dynamic name)
+        public IActionResult Test(string data)
         {
+            List<Transaction> transactions = new List<Transaction>();
+            foreach (string element in data.Replace("{\"ClientTransaction\":[", "").Replace("]}", "").Replace("\"", "").Replace("z", "").Split("},{"))
+            {
+                int idTransaction = int.Parse(element.Split(":").Last().ToString().Split("_").First().ToString());
+                int idDetail = int.Parse(element.Split(":").Last().ToString().Split("_").ToArray()[1].ToString());
+                int idProduct = int.Parse(element.Split(":").Last().ToString().Split("_").ToArray()[2].ToString());
+                int idType = int.Parse(element.Split(":").Last().ToString().Split("_").ToArray()[3].ToString());
+
+                if (transactions.Count == 0)
+                    transactions.Add(new Transaction() { Id = idTransaction });
+                else
+                    if (transactions.Where(t => t.Id == idTransaction).Count() > 0)
+                    transactions.Where(t => t.Id == idTransaction).First().TransactionDetail.Add(new TransactionDetail() { Id = idTransaction, ProductId = idProduct, MovementTypeId = idType });
+                else
+                {
+                    Transaction transactionTem = new Transaction() { Id = idTransaction };
+                    transactionTem.TransactionDetail.Add(new TransactionDetail() { Id = idTransaction, ProductId = idProduct, MovementTypeId = idType });
+                }
+            }
             return Json("Hola Mundo");
         }
+    }
+    public class ClientTransaction {
+        public string ProducId { get; set; }
+        public string Value { get; set; }
     }
 }

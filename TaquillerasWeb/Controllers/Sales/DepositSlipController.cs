@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Taquilleras.Data;
 using TaquillerasWeb.Models;
 using Taquilleras.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace TaquillerasWeb.Controllers.Sales
 {
@@ -25,7 +26,12 @@ namespace TaquillerasWeb.Controllers.Sales
 
         public IActionResult Lista()
         {
-            return View(entitytem.GetAllAsync().Result);
+            if (ModelState.IsValid)
+            {
+                var all = entitytem.GetAllAsync().Result;
+                return View(all);
+            }
+            return View();
         }
         [HttpGet]
         public IActionResult Create()
@@ -39,6 +45,7 @@ namespace TaquillerasWeb.Controllers.Sales
             if (ModelState.IsValid)
             {
                 entitytem.CreateAsync(depositSlip).Wait();
+                
             }
             return RedirectToAction(nameof(Lista));
         }
@@ -57,7 +64,6 @@ namespace TaquillerasWeb.Controllers.Sales
             }
             return RedirectToAction(nameof(Lista));
         }
-
         [HttpPost]
         public IActionResult Edit(Taquilleras.Entities.DepositSlip depositSlip)
         {
@@ -67,5 +73,57 @@ namespace TaquillerasWeb.Controllers.Sales
             }
             return RedirectToAction(nameof(Lista));
         }
+
+
+
+
+        [HttpGet]
+        public IActionResult Edit1(int? id)
+        {
+            if (id != null)
+            {
+                Taquilleras.Entities.DepositSlip result = entitytem.GetAsync(id).Result;
+                if (result != null)
+                {
+                    return View(result);
+                }
+            }
+            return RedirectToAction(nameof(Lista));
+        }
+        [HttpPost]
+        public IActionResult Edit1(Taquilleras.Entities.DepositSlip depositSlip)
+        {
+            if (ModelState.IsValid)
+            {
+                entitytem.UpdateAsync(depositSlip).Wait();
+            }
+            return RedirectToAction(nameof(Lista));
+        }
+        //[HttpGet]
+        //public PartialViewResult Edit1(int? id)
+        //{
+        //    if (id != null)
+        //    {
+        //        Taquilleras.Entities.DepositSlip result = entitytem.GetAsync(id).Result;
+        //        if (result != null)
+        //        {
+        //            return PartialView(result);
+        //        }
+        //    }
+        //    return PartialView(nameof(Lista));
+        //}
+        //[HttpPost]
+        //public JsonResult Edit1(Taquilleras.Entities.DepositSlip depositSlip)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        entitytem.UpdateAsync(depositSlip).Wait();
+        //    }
+        //    return Json(depositSlip);
+        //}
+
+
+
+
     }
 }

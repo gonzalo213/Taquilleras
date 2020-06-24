@@ -12,7 +12,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Taquilleras.Data;
 using TaquillerasWeb.Models;
-using TaquillerasWeb.Services;
 namespace TaquillerasWeb
 {
     public class Startup
