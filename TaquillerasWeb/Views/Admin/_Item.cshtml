@@ -3,7 +3,7 @@
 
 <div class="card border-info mb-3" style="max-width: 18rem;">
 
-    <div class="card-header">Turno</div>
+    
     <div class="card-body text-black-50">
         <div class="container">
             @foreach (Taquilleras.Entities.TransactionDetail detail in Model)
@@ -11,7 +11,7 @@
                 <div class="row ">
                    
                     <span class="control-label">@detail.Product.Description </span>
-                    <span class="control-label">@detail.MovementType.Description </span>
+                    <span class="control-label">@detail.MovementType.Description  </span>
                  
                     @Html.TextBox(string.Format("t-{0};d-{1};p-{2};m-{3}", detail.Transaction.Id, detail.Id, detail.Product.IdProduct, detail.MovementType.IdTipoMovimiento), detail.Quantity)
                    
