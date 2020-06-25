@@ -59,9 +59,9 @@
 
                 <div class="card border-info mb-3 mr-5 " style="max-width: 18rem;">
                     <div class="card-header">
-                        <h6>Turno:<span class="badge badge-dark mr-3"> @transaction.ShiftTypeId</span></h6>
+                        <h6>Turno:<span class="badge badge-dark mr-3"> @transaction.ShiftType.Description</span></h6>
 
-                        <h6>Nombre Taquillera:<span class="text-black-50">Nombre Taquillera</span></h6>
+                        <h6>Nombre Taquillera:<span class="text-black-50">@string.Format("{0} {1} {2}", transaction.BoxOfficeOperator.Name, transaction.BoxOfficeOperator.LastName, transaction.BoxOfficeOperator.LastName2)</span></h6>
 
                     </div>
                     <div class="card-body text-info">
