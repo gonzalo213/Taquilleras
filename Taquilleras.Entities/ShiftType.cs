@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
-
+using Dapper.Contrib.Extensions;
 namespace Taquilleras.Entities
 {
+    [Table("ShiftType")]
     public partial class ShiftType
     {
         public ShiftType()

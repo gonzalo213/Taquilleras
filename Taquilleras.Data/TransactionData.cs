@@ -14,6 +14,10 @@ namespace Taquilleras.Data
 
         private readonly IDbConnectionFactory _factory;
         TransactionDetailsData detailsManger;
+        EntityManager<BoxOfficeOperator> boxOfficeOperatorManager;
+        EntityManager<User> userManager;
+        EntityManager<TicketOffice> ticketOfficeManager;
+        EntityManager<ShiftType> shiftTypeManager;
 
         public TransactionData(IDbConnectionFactory factory) : base(factory)
         {
@@ -42,13 +46,27 @@ namespace Taquilleras.Data
         {
             ICollection<Transaction> transactions = new HashSet<Transaction>();
             detailsManger = new TransactionDetailsData(this._factory);
+            userManager = new EntityManager<User>(this._factory);
+            boxOfficeOperatorManager = new EntityManager<BoxOfficeOperator>(this._factory);
+            shiftTypeManager = new EntityManager<ShiftType>(this._factory);
+            ticketOfficeManager = new EntityManager<TicketOffice>(this._factory);
             using (var db = _factory.CreateConnection(Constants.ConnectionStringName))
             {
-                string sql = string.Format(@"select * from dbo.SaleTransaction tra where tra.KeyTaq = '{0}' and tra.DateVenta = '{1}'", ticketOfficeId, date.ToString("yyyy-MM-dd"));
+                string sql = string.Format(@"select * from dbo.SaleTransaction tra where tra.TicketOfficeId = '{0}' and tra.DateVenta = '{1}'", ticketOfficeId, date.ToString("yyyy-MM-dd"));
                 transactions = this.GetBySQL(sql).Result.ToList();                
             }
             foreach (Transaction transaccion in transactions)
-                transaccion.TransactionDetail=detailsManger.GetByTransaction(transaccion.Id);
+            {
+                transaccion.BoxOfficeOperator = boxOfficeOperatorManager.GetAsync(transaccion.BoxOfficeOperatorId).Result;
+                transaccion.TicketOffice =  ticketOfficeManager.GetAsync(transaccion.TicketOfficeId).Result;
+                transaccion.ShiftType = shiftTypeManager.GetAsync(transaccion.ShiftTypeId).Result;
+                User user = userManager.GetAsync(transaccion.BoxOfficeOperator.UserId).Result;
+                transaccion.BoxOfficeOperator.Name = user.Name;
+                transaccion.BoxOfficeOperator.LastName = user.LastName;
+                transaccion.BoxOfficeOperator.LastName2 = user.LastName2;
+
+                transaccion.TransactionDetail = detailsManger.GetByTransaction(transaccion.Id);
+            }
             return transactions;
         }
 

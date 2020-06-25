@@ -25,14 +25,14 @@
 
 @if (Model != null)
 {
-<div class="row" id="divDetails" @*style="text-align: right"*@>
+<div class="row" id="divDetails" >
     @foreach (Taquilleras.Entities.Transaction transaction in Model)
     {
     <div class="card border-info mb-3 mr-5 mt-3" style="max-width: 18rem;">
         <div class="card-header">
-            <h6>Turno:<span class="badge badge-dark mr-3"> @transaction.ShiftTypeId</span></h6>
+            <h6>Turno:<span class="badge badge-dark mr-3"> @transaction.ShiftType.Description</span></h6>
            
-            <h6>Nombre Taquillera:<span class="text-black-50">Nombre Taquillera</span></h6>
+            <h6>Nombre Taquillera:<span class="text-black-50">@string.Format("{0} {1} {2}", transaction.BoxOfficeOperator.Name, transaction.BoxOfficeOperator.LastName, transaction.BoxOfficeOperator.LastName2)</span></h6>
 
         </div>
         <div class="card-body text-info">
@@ -72,24 +72,25 @@
 
     $(function (){
         $("#btnApplyChanges").click(function () {
-            var jsonStr = '{"details":[{"ControlId":"","values":"0"},{"ControlId":"0","values":"0"}]}';
-            var obj = JSON.parse(jsonStr);
+            var jsonStr = '';
             $("#divDetails").find(':input').each(function () {
                 var elemento = this;
-                obj['details'].push({ "tControlId": elemento.id, "value": elemento.value});
+                if (elemento.value > 0) {
+                    if (jsonStr == '') {
+                        jsonStr = '{"ClientTransaction":[{"ProducId":"' + elemento.id + '","Value":"' + elemento.value + '"}]}';
+                        obj = JSON.parse(jsonStr);
+                    }
+                    else
+                        obj['ClientTransaction'].push({ "ProducId": elemento.id, "Value": elemento.value });
+                }
             })
 
-            jsonStr = JSON.stringify(obj);
-            alert(jsonStr);
-
             $.ajax({
-                type: "POST",
-                async: false,
-                url: "@Url.Action("Test","Admin")",
-                data: "{name:'Mauricio'}",
-                contentType: "application/json",
-                dataType: "json",
 
+                url: "@Url.Action("Test","Admin")",
+                data: { data: JSON.stringify(obj) },
+                contentType: "application/json",
+   
                 success: function (json) {
                     $("#btnClick").val(json)
                 },

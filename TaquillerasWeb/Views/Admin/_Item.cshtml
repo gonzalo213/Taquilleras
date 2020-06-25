@@ -1,29 +1,17 @@
 ﻿@model List<Taquilleras.Entities.TransactionDetail>
 
+@foreach (Taquilleras.Entities.TransactionDetail detail in Model)
+{
+    <!--t -{ 0}; d -{ 1}; p -{ 2}; m -{ 3}-->
+    <div class="form-row ml-4">
+        <div class="col">
+            <label class="control-label">@detail.Product.Description</label>
+            <label class="control-label">@detail.MovementType.Description </label>
+            @Html.TextBox(string.Format("{0};{1};{2};{3}", detail.Transaction.Id, detail.Id, detail.Product.IdProduct, detail.MovementType.IdTipoMovimiento), detail.Quantity)
+        </div>
 
-   
+    </div>
+
+}
 
 
-
-        @foreach (Taquilleras.Entities.TransactionDetail detail in Model)
-        {
-            
-            <div class="form-row ml-4">
-                <div class="col">
-                    <label class="control-label">@detail.Product.Description</label>
-                    <label class="control-label">@detail.MovementType.Description </label>
-                    @Html.TextBox(string.Format("t-{0};d-{1};p-{2};m-{3}", detail.Transaction.Id, detail.Id, detail.Product.IdProduct, detail.MovementType.IdTipoMovimiento), detail.Quantity)
-                </div>
-               
-            </div>
-            @*<div class="row ">
-
-                <span class="control-label">@detail.Product.Description </span>
-                <span class="control-label">@detail.MovementType.Description  </span>
-
-                @Html.TextBox(string.Format("t-{0};d-{1};p-{2};m-{3}", detail.Transaction.Id, detail.Id, detail.Product.IdProduct, detail.MovementType.IdTipoMovimiento), detail.Quantity)
-
-            </div>*@
-        }
-
- 

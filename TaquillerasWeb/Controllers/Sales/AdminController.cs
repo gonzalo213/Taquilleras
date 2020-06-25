@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Internal;
+using System.Runtime.CompilerServices;
 
 namespace TaquillerasWeb.Controllers.Sales
 {
@@ -96,24 +97,20 @@ namespace TaquillerasWeb.Controllers.Sales
             List<Transaction> transactions = new List<Transaction>();
             foreach (string element in data.Replace("{\"ClientTransaction\":[", "").Replace("]}", "").Replace("\"", "").Replace("z", "").Split("},{"))
             {
-                int idTransaction = int.Parse(element.Split(":").Last().ToString().Split("_").First().ToString());
-                int idDetail = int.Parse(element.Split(":").Last().ToString().Split("_").ToArray()[1].ToString());
-                int idProduct = int.Parse(element.Split(":").Last().ToString().Split("_").ToArray()[2].ToString());
-                int idType = int.Parse(element.Split(":").Last().ToString().Split("_").ToArray()[3].ToString());
+                int idTransaction = int.Parse(element.Split(",").First().Split(":").Last().ToString().Split("_").First().ToString());
+                int idDetail = int.Parse(element.Split(",").First().Split(":").Last().ToString().Split("_").ToArray()[1].ToString());
+                int idProduct = int.Parse(element.Split(",").First().Split(":").Last().ToString().Split("_").ToArray()[2].ToString());
+                int idType = int.Parse(element.Split(",").First().Split(":").Last().ToString().Split("_").ToArray()[3].ToString());
+                decimal value = decimal.Parse(element.Split(",").Last().Split(":").Last().ToString().Replace("}",""));
 
-                if (transactions.Count == 0)
-                    transactions.Add(new Transaction() { Id = idTransaction });
-                else
-                {
-
-                }
-                    if (transactions.Where(t => t.Id == idTransaction).Count() > 0)
-                    transactions.Where(t => t.Id == idTransaction).First().TransactionDetail.Add(new TransactionDetail() { Id = idTransaction, ProductId = idProduct, MovementTypeId = idType });
+                if (transactions.Where(t => t.Id == idTransaction).Count() > 0)
+                    transactions.Where(t => t.Id == idTransaction).First().TransactionDetail.Add(new TransactionDetail() { Id = idTransaction, ProductId = idProduct, MovementTypeId = idType, Quantity = value });
                 else
                 {
                     Transaction transactionTem = new Transaction() { Id = idTransaction };
-                    transactionTem.TransactionDetail.Add(new TransactionDetail() { Id = idTransaction, ProductId = idProduct, MovementTypeId = idType });
-                }
+                    transactionTem.TransactionDetail.Add(new TransactionDetail() { TransactionId = idTransaction, ProductId = idProduct, MovementTypeId = idType, Quantity = value });
+                    transactions.Add(transactionTem);
+                }                
             }
             return Json("Hola Mundo");
         }
