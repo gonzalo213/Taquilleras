@@ -1,11 +1,28 @@
 ﻿@model List<Taquilleras.Entities.Transaction>
 @using (Html.BeginForm("Find", "Admin", FormMethod.Post))
 {
+    <link href="~/Tempus/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
     <h4><strong>Modificacion de Venta</strong></h4>
     <div class="card">
+
         <div class="card-header">
-            <div>
-                <input required type="text" class="form-control col-3 offset-9" id="dpFilter" name="dpFilter" placeholder="Selecciona Fecha" />
+            @*<div>
+                    <input required type="text" class="form-control col-3 offset-9" id="dpFilter1" name="dpFilter" placeholder="Selecciona Fecha" />
+                </div>*@
+            <div class="row  col-8 offset-4  ">
+                <div class="col-sm-6  ">
+                    <div class="form-group">
+                        <div class="input-group date" id="dpFilter" data-target-input="nearest">
+
+                            <input autocomplete="off" required type="text" class="form-control datetimepicker-input" data-toggle="datetimepicker" id="dpFilter" name="dpFilter" data-target="#dpFilter" placeholder="Selecciona Fecha" />
+
+                            <div class="input-group-append" data-target="#dpFilter" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -25,37 +42,66 @@
 
 @if (Model != null)
 {
-<div class="row" id="divDetails" >
-    @foreach (Taquilleras.Entities.Transaction transaction in Model)
-    {
-    <div class="card border-info mb-3 mr-5 mt-3" style="max-width: 18rem;">
-        <div class="card-header">
-            <h6>Turno:<span class="badge badge-dark mr-3"> @transaction.ShiftType.Description</span></h6>
-           
-            <h6>Nombre Taquillera:<span class="text-black-50">@string.Format("{0} {1} {2}", transaction.BoxOfficeOperator.Name, transaction.BoxOfficeOperator.LastName, transaction.BoxOfficeOperator.LastName2)</span></h6>
-
-        </div>
-        <div class="card-body text-info">
-            <div class="">@Html.Partial("_Item.cshtml", transaction.TransactionDetail)</div>
-        </div>
-        <div class="card-footer bg-transparent border-info">
-        <h4>Saldo Total<span class="badge badge-success">$@transaction.TotalAmount</span></h4>
+    
+<div class="card mt-1">
+    <div class="form-row mt-1">
+        <div class="col offset-10">
+            <input type="button" id="btnClick" value="Click" class="btn btn-outline-danger btn-sm" />
+            <input type="button" id="btnApplyChanges" value="Aplicar cambios" class="btn btn-outline-success btn-sm" />
         </div>
     </div>
+    <div class="card-body">
 
-        
-    }
+        <div class="row" id="divDetails">
+
+            @foreach (Taquilleras.Entities.Transaction transaction in Model)
+            {
+
+                <div class="card border-info mb-3 mr-5 " style="max-width: 18rem;">
+                    <div class="card-header">
+                        <h6>Turno:<span class="badge badge-dark mr-3"> @transaction.ShiftTypeId</span></h6>
+
+                        <h6>Nombre Taquillera:<span class="text-black-50">Nombre Taquillera</span></h6>
+
+                    </div>
+                    <div class="card-body text-info">
+                        <div class="">
+                            @Html.Partial("_Item.cshtml", transaction.TransactionDetail)
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-info">
+                        <h4>Saldo Total<span class="badge badge-success">$@transaction.TotalAmount</span></h4>
+                    </div>
+                </div>
+
+
+            }
+        </div>
+    </div>
 </div>
 }
-<input type="button" id="btnClick" value="Click" class="btn btn-primary" />
-<input type="button" id="btnApplyChanges" value="Aplicar cambios" class="btn btn-primary" />
+
 <span id="span"></span>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<script src="~/Tempus/moment.js"></script>
+<script src="~/Tempus/tempusdominus-bootstrap-4.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#dpFilter').datetimepicker({
+            locale: 'es',
+            format: 'L'
+        });
+    });
+</script>
 <script>
-    $('#dpFilter').datepicker({
+
+
+
+
+    $('#dpFilter1').datepicker({
         uiLibrary: 'bootstrap4'
     });
 
